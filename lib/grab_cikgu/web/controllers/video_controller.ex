@@ -3,6 +3,7 @@ defmodule GrabCikgu.Web.VideoController do
   alias GrabCikgu.Account
   alias GrabCikgu.Repo
   alias GrabCikgu.Video
+  alias GrabCikgu.Videos
   
   
 
@@ -11,7 +12,7 @@ defmodule GrabCikgu.Web.VideoController do
   end
 
   def index(conn, _params, user) do
-    videos = Repo.all(user_videos(user))
+    videos = Videos.list_videos(user)
     render(conn, "index.html", videos: videos)
   end
 
