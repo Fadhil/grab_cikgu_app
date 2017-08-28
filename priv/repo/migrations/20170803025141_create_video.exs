@@ -14,4 +14,3 @@ defmodule GrabCikgu.Repo.Migrations.CreateVideo do
     create index(:videos, [:user_id])
   end
 end
-
