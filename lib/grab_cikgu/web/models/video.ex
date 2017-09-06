@@ -18,7 +18,4 @@ defmodule GrabCikgu.Video do
     |> cast(params, @required_fields, @optional_fields)
   end
 
-
-
-  
 end

@@ -23,6 +23,34 @@
     		<strong>Name:</strong>
     		<%= @profile.name %>
   		</li>
+  		<li>
+    		<strong>Ic No:</strong>
+    		<%= @profile.icno %>
+  		</li>
+  		<li>
+    		<strong>Gender:</strong>
+    		<%= @profile.gender %>
+  		</li>
+  		<li>
+    		<strong>Age:</strong>
+    		<%= @profile.age %>
+  		</li>
+  		<li>
+    		<strong>Occupation:</strong>
+    		<%= @profile.job %>
+  		</li>
+  		<li>
+    		<strong>Tutor Status:</strong>
+    		<%= @profile.status %>
+  		</li>
+  		<li>
+    		<strong>City:</strong>
+    		<%= @profile.city %>
+  		</li>
+  		<li>
+    		<strong>Tutor License:</strong>
+    		<%= @profile.license %>
+  		</li>
 	  </ul>
     </div>
 
@@ -52,3 +80,4 @@
 
 <span><%= link "Edit", to: profile_path(@conn, :edit, @profile) %></span>
 <span><%= link "Back", to: profile_path(@conn, :index) %></span>
+

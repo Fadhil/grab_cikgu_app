@@ -12,9 +12,45 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :icno, class: "control-label" %>
+    <%= label f, :ic_no, class: "control-label" %>
     <%= text_input f, :icno, class: "form-control" %>
     <%= error_tag f, :icno %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :gender, class: "control-label" %>
+    <%= text_input f, :gender, class: "form-control" %>
+    <%= error_tag f, :gender %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :age, class: "control-label" %>
+    <%= text_input f, :age, class: "form-control" %>
+    <%= error_tag f, :age %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :job, class: "control-label" %>
+    <%= text_input f, :job, class: "form-control" %>
+    <%= error_tag f, :job %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :tutor_status, class: "control-label" %>
+    <%= text_input f, :status, class: "form-control" %>
+    <%= error_tag f, :status %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :city, class: "control-label" %>
+    <%= text_input f, :city, class: "form-control" %>
+    <%= error_tag f, :city %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :license, class: "control-label" %>
+    <%= text_input f, :license, class: "form-control" %>
+    <%= error_tag f, :license %>
   </div>
 
   <div class="form-group">
