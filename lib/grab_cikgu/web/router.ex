@@ -28,6 +28,8 @@ defmodule GrabCikgu.Web.Router do
     pipe_through [:browser, :authenticate_user]
 
     resources "/videos", VideoController
+    
+    resources "/profiles", ProfileController
   end
 
   # Other scopes may use custom stacks.

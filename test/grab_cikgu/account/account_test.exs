@@ -130,4 +130,188 @@ defmodule GrabCikgu.AccountTest do
       assert %Ecto.Changeset{} = Account.change_video(video)
     end
   end
+
+  describe "peoples" do
+    alias GrabCikgu.Account.People
+
+    @valid_attrs %{icno: 42, name: "some name"}
+    @update_attrs %{icno: 43, name: "some updated name"}
+    @invalid_attrs %{icno: nil, name: nil}
+
+    def people_fixture(attrs \\ %{}) do
+      {:ok, people} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Account.create_people()
+
+      people
+    end
+
+    test "list_peoples/0 returns all peoples" do
+      people = people_fixture()
+      assert Account.list_peoples() == [people]
+    end
+
+    test "get_people!/1 returns the people with given id" do
+      people = people_fixture()
+      assert Account.get_people!(people.id) == people
+    end
+
+    test "create_people/1 with valid data creates a people" do
+      assert {:ok, %People{} = people} = Account.create_people(@valid_attrs)
+      assert people.icno == 42
+      assert people.name == "some name"
+    end
+
+    test "create_people/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Account.create_people(@invalid_attrs)
+    end
+
+    test "update_people/2 with valid data updates the people" do
+      people = people_fixture()
+      assert {:ok, people} = Account.update_people(people, @update_attrs)
+      assert %People{} = people
+      assert people.icno == 43
+      assert people.name == "some updated name"
+    end
+
+    test "update_people/2 with invalid data returns error changeset" do
+      people = people_fixture()
+      assert {:error, %Ecto.Changeset{}} = Account.update_people(people, @invalid_attrs)
+      assert people == Account.get_people!(people.id)
+    end
+
+    test "delete_people/1 deletes the people" do
+      people = people_fixture()
+      assert {:ok, %People{}} = Account.delete_people(people)
+      assert_raise Ecto.NoResultsError, fn -> Account.get_people!(people.id) end
+    end
+
+    test "change_people/1 returns a people changeset" do
+      people = people_fixture()
+      assert %Ecto.Changeset{} = Account.change_people(people)
+    end
+  end
+
+  describe "profiles" do
+    alias GrabCikgu.Account.Profile
+
+    @valid_attrs %{name: "some name"}
+    @update_attrs %{name: "some updated name"}
+    @invalid_attrs %{name: nil}
+
+    def profile_fixture(attrs \\ %{}) do
+      {:ok, profile} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Account.create_profile()
+
+      profile
+    end
+
+    test "list_profiles/0 returns all profiles" do
+      profile = profile_fixture()
+      assert Account.list_profiles() == [profile]
+    end
+
+    test "get_profile!/1 returns the profile with given id" do
+      profile = profile_fixture()
+      assert Account.get_profile!(profile.id) == profile
+    end
+
+    test "create_profile/1 with valid data creates a profile" do
+      assert {:ok, %Profile{} = profile} = Account.create_profile(@valid_attrs)
+      assert profile.name == "some name"
+    end
+
+    test "create_profile/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Account.create_profile(@invalid_attrs)
+    end
+
+    test "update_profile/2 with valid data updates the profile" do
+      profile = profile_fixture()
+      assert {:ok, profile} = Account.update_profile(profile, @update_attrs)
+      assert %Profile{} = profile
+      assert profile.name == "some updated name"
+    end
+
+    test "update_profile/2 with invalid data returns error changeset" do
+      profile = profile_fixture()
+      assert {:error, %Ecto.Changeset{}} = Account.update_profile(profile, @invalid_attrs)
+      assert profile == Account.get_profile!(profile.id)
+    end
+
+    test "delete_profile/1 deletes the profile" do
+      profile = profile_fixture()
+      assert {:ok, %Profile{}} = Account.delete_profile(profile)
+      assert_raise Ecto.NoResultsError, fn -> Account.get_profile!(profile.id) end
+    end
+
+    test "change_profile/1 returns a profile changeset" do
+      profile = profile_fixture()
+      assert %Ecto.Changeset{} = Account.change_profile(profile)
+    end
+  end
+
+  describe "profiles" do
+    alias GrabCikgu.Account.Profile
+
+    @valid_attrs %{icno: "some icno", name: "some name"}
+    @update_attrs %{icno: "some updated icno", name: "some updated name"}
+    @invalid_attrs %{icno: nil, name: nil}
+
+    def profile_fixture(attrs \\ %{}) do
+      {:ok, profile} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Account.create_profile()
+
+      profile
+    end
+
+    test "list_profiles/0 returns all profiles" do
+      profile = profile_fixture()
+      assert Account.list_profiles() == [profile]
+    end
+
+    test "get_profile!/1 returns the profile with given id" do
+      profile = profile_fixture()
+      assert Account.get_profile!(profile.id) == profile
+    end
+
+    test "create_profile/1 with valid data creates a profile" do
+      assert {:ok, %Profile{} = profile} = Account.create_profile(@valid_attrs)
+      assert profile.icno == "some icno"
+      assert profile.name == "some name"
+    end
+
+    test "create_profile/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Account.create_profile(@invalid_attrs)
+    end
+
+    test "update_profile/2 with valid data updates the profile" do
+      profile = profile_fixture()
+      assert {:ok, profile} = Account.update_profile(profile, @update_attrs)
+      assert %Profile{} = profile
+      assert profile.icno == "some updated icno"
+      assert profile.name == "some updated name"
+    end
+
+    test "update_profile/2 with invalid data returns error changeset" do
+      profile = profile_fixture()
+      assert {:error, %Ecto.Changeset{}} = Account.update_profile(profile, @invalid_attrs)
+      assert profile == Account.get_profile!(profile.id)
+    end
+
+    test "delete_profile/1 deletes the profile" do
+      profile = profile_fixture()
+      assert {:ok, %Profile{}} = Account.delete_profile(profile)
+      assert_raise Ecto.NoResultsError, fn -> Account.get_profile!(profile.id) end
+    end
+
+    test "change_profile/1 returns a profile changeset" do
+      profile = profile_fixture()
+      assert %Ecto.Changeset{} = Account.change_profile(profile)
+    end
+  end
 end
