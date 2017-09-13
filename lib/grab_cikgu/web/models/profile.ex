@@ -1,6 +1,7 @@
 defmodule GrabCikgu.Profile do
   use GrabCikgu.Web, :model
 
+
   schema "profiles" do
     field :name, :string
     field :icno, :string
@@ -8,6 +9,7 @@ defmodule GrabCikgu.Profile do
     field :age, :integer
     field :job, :string
     field :status, :string
+    field :state, :string
     field :city, :string
     field :license, :string
   
@@ -17,7 +19,7 @@ defmodule GrabCikgu.Profile do
   end
 
   @required_fields ~w()
-  @optional_fields ~w(name icno gender age job status city license)
+  @optional_fields ~w(name icno gender age job status state city license)
 
   def changeset(model, params \\ %{}) do
     model

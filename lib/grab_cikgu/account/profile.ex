@@ -11,6 +11,7 @@ defmodule GrabCikgu.Account.Profile do
     field :age, :integer
     field :job, :string
     field :status, :string
+    field :state, :string
     field :city, :string
     field :license, :string
     field :user_id, :id
@@ -21,7 +22,7 @@ defmodule GrabCikgu.Account.Profile do
   @doc false
   def changeset(%Profile{} = profile, attrs) do
     profile
-    |> cast(attrs, [:name, :icno, :gender, :age, :job, :status, :city, :license])
-    |> validate_required([:name, :icno, :gender, :age, :job, :status, :city, :license])
+    |> cast(attrs, [:name, :icno, :gender, :age, :job, :status, :state, :city, :license])
+    |> validate_required([:name, :icno, :gender, :age, :job, :status, :state, :city, :license])
   end
 end

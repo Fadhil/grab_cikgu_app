@@ -7,6 +7,7 @@ defmodule GrabCikgu.Repo.Migrations.AddFieldsToProfiles do
     	add :age, :integer
     	add :job, :string
     	add :status, :string
+      add :state, :string
     	add :city, :string
     	add :license, :string
     end

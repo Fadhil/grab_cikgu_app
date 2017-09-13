@@ -43,6 +43,10 @@
     		<strong>Tutor Status:</strong>
     		<%= @profile.status %>
   		</li>
+      <li>
+        <strong>State:</strong>
+        <%= @profile.state %>
+      </li>
   		<li>
     		<strong>City:</strong>
     		<%= @profile.city %>

@@ -19,7 +19,7 @@
 
   <div class="form-group">
     <%= label f, :gender, class: "control-label" %>
-    <%= text_input f, :gender, class: "form-control" %>
+    <%= select f, :gender, ["Select", "Male": "Male", "Female": "Female"] %>
     <%= error_tag f, :gender %>
   </div>
 
@@ -37,8 +37,23 @@
 
   <div class="form-group">
     <%= label f, :tutor_status, class: "control-label" %>
-    <%= text_input f, :status, class: "form-control" %>
+    <%= select f, :status, ["Select", "Part-Time": "Part-Time", "Full-Time": "Full-Time"] %>
     <%= error_tag f, :status %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :state, class: "control-label" %>
+    <%= select f, :state, 
+    ["Select", 
+    "Selangor": "Selangor", 
+    "Putrajaya": "Putrajaya",
+    "Kuala Lumpur": "Kuala Lumpur",
+    "Negeri Sembilan": "Negeri Sembilan",
+    "Melaka": "Melaka",
+    "Perak": "Perak",
+    "Kedah": "Kedah",
+    "Pulau Pinang": "Pulau Pinang"] %>
+    <%= error_tag f, :state %>
   </div>
 
   <div class="form-group">
@@ -56,4 +71,5 @@
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
+
 <% end %>
