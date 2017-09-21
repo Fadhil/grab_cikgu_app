@@ -1,4 +1,4 @@
-<%= form_for @changeset, @action, fn f -> %>
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
@@ -69,7 +69,55 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :qualification, class: "control-label" %>
+    <%= text_input f, :qualification, class: "form-control" %>
+    <%= error_tag f, :qualification %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :achievement, class: "control-label" %>
+    <%= text_input f, :achievement, class: "form-control" %>
+    <%= error_tag f, :achievement %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :experience, class: "control-label" %>
+    <%= text_input f, :experience, class: "form-control" %>
+    <%= error_tag f, :experience %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :about, class: "control-label" %>
+    <%= text_input f, :about, class: "form-control" %>
+    <%= error_tag f, :about %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :document, class: "control-label" %>
+    <%= file_input f, :document %>
+    <%= error_tag f, :document %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :teaching, class: "control-label" %>
+    <%= text_input f, :teaching, class: "form-control" %>
+    <%= error_tag f, :teaching %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :area_covered, class: "control-label" %>
+    <%= text_input f, :area, class: "form-control" %>
+    <%= error_tag f, :area %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :teach_at_tuition_center, class: "control-label" %>
+    <%= select f, :tuitioncenter, ["Yes or No", "Yes": "Yes", "No": "No"] %>
+    <%= error_tag f, :tuitioncenter %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 
-<% end %>
+  <% end %>

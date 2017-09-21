@@ -1,5 +1,7 @@
 defmodule GrabCikgu.Profile do
   use GrabCikgu.Web, :model
+  use Arc.Ecto.Model
+  alias GrabCikgu.Document
 
 
   schema "profiles" do
@@ -12,6 +14,15 @@ defmodule GrabCikgu.Profile do
     field :state, :string
     field :city, :string
     field :license, :string
+
+    field :qualification, :string
+    field :achievement, :string
+    field :experience, :string
+    field :about, :string
+    field :file, GrabCikgu.Document.Type
+    field :teaching, :string
+    field :area, :string
+    field :tuitioncenter, :string
   
     belongs_to :user, GrabCikgu.User, foreign_key: :user_id
 
@@ -19,11 +30,24 @@ defmodule GrabCikgu.Profile do
   end
 
   @required_fields ~w()
-  @optional_fields ~w(name icno gender age job status state city license)
+  @optional_fields ~w(name icno gender age job status state city license 
+                      qualification achievement experience about
+                      teaching area tuitioncenter)
+
+  @required_file_fields ~w()
+  @optional_file_fields ~w(document)
+
+  @doc """
+  Creates a changeset based on the `model` and `params`.
+
+  If no params are provided, an invalid changeset is returned
+  with no validation performed.
+  """
 
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> cast_attachments(params, @required_file_fields, @optional_file_fields)
   end
 
 end

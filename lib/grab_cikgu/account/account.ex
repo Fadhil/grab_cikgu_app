@@ -5,7 +5,6 @@ defmodule GrabCikgu.Account do
 
   import Ecto.Query, warn: false
   alias GrabCikgu.Repo
-
   alias GrabCikgu.Account.Video
 
   @doc """
