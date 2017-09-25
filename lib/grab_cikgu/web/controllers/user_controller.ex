@@ -1,9 +1,20 @@
 defmodule GrabCikgu.Web.UserController do
 	use GrabCikgu.Web, :controller
 	alias GrabCikgu.Repo
-	
+	alias GrabCikgu.Account.Role
+	alias GrabCikgu.Account.Profile
+	require IEx
 	plug :authenticate_user when action in [:index, :show]
-	
+	plug :load_roles when action in [:new, :create, :edit, :update]
+
+	defp load_roles(conn, _) do
+		query =
+		  Role
+		  |> Role.alphabetical
+		  |> Role.names_and_ids
+		roles = Repo.all query
+		assign(conn, :roles, roles)
+	end
 
 	def index(conn, _params) do
 		users = Repo.all(GrabCikgu.User)
@@ -17,8 +28,14 @@ defmodule GrabCikgu.Web.UserController do
 	end
 
 	def create(conn, %{"user" => user_params}) do
-		changeset = User.registration_changeset(%User{}, user_params)
-		case Repo.insert(changeset) do
+		changeset_user = User.registration_changeset(%User{}, user_params)
+		changeset_profile = Profile.changeset(%Profile{}, %{})
+		changeset_user_profile = Ecto.Changeset.put_assoc(changeset_user, :profile, changeset_profile)
+		role = Repo.get(Role, user_params["role_id"])
+		changeset_role = Role.changeset(role, %{})
+		changeset_user_profile_role = Ecto.Changeset.put_assoc(changeset_user_profile, :role, changeset_role)
+		
+		case Repo.insert(changeset_user_profile_role) do
 		{:ok, user} ->
 			conn
 			|> GrabCikgu.Web.Auth.login(user)

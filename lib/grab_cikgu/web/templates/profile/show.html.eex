@@ -121,5 +121,5 @@
   </div>
 </div>
 
-<span><%= link "Edit", to: profile_path(@conn, :edit, @profile) %></span>
+<span><%=# link "Edit", to: profile_path(@conn, :edit, @profile) %></span>
 <span><%= link "Back", to: profile_path(@conn, :index) %></span>

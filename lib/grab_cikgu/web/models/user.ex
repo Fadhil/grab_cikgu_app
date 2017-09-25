@@ -7,20 +7,26 @@ defmodule GrabCikgu.User do
 		field :password, :string, virtual: true
 		field :password_hash, :string
 		has_many :videos, GrabCikgu.Video
+		has_one :profile, GrabCikgu.Account.Profile
+		belongs_to :role, GrabCikgu.Account.Role, on_replace: :nilify
 
 		timestamps
 	end
 
+	
+	@optional_fields ~w(role_id)
+
 	def changeset(model, params \\ %{}) do
 		model
-		|> cast(params, ~w(name username), [])
+		|> cast(params, ~w(name username))
+		|> validate_required([:name, :username])
 		|> validate_length(:username, min: 1, max: 20)
 	end
 
 	def registration_changeset(model, params) do
 		model
 		|> changeset(params)
-		|> cast(params, ~w(password), [])
+		|> cast(params, ~w(password))
 		|> validate_length(:password, min: 6, max: 100)
 		|> put_pass_hash()
 	end

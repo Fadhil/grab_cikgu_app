@@ -1,9 +1,9 @@
 defmodule GrabCikgu.Account.Profile do
   use Ecto.Schema
-  import Ecto.Changeset
-  alias GrabCikgu.Account.Profile
   use Arc.Ecto.Model
+  import Ecto.Changeset
   alias GrabCikgu.Document
+  alias GrabCikgu.Account.Profile
 
 
   schema "account_profiles" do
@@ -48,7 +48,7 @@ defmodule GrabCikgu.Account.Profile do
 
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields)
     |> cast_attachments(params, @required_file_fields, @optional_file_fields)
   end
 
