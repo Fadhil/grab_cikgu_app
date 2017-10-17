@@ -17,7 +17,7 @@ defmodule GrabCikgu.Web.UserController do
 	end
 
 	def index(conn, _params) do
-		users = Repo.all(GrabCikgu.User)
+		users = Repo.all(GrabCikgu.User) |> Repo.preload(:profile)
 		render conn, "index.html", users: users
 	end
 
@@ -40,7 +40,7 @@ defmodule GrabCikgu.Web.UserController do
 			conn
 			|> GrabCikgu.Web.Auth.login(user)
 			|> put_flash(:info, "#{user.name} created!")
-			|> redirect(to: user_path(conn, :index))
+			|> redirect(to: user_path(conn, :show, user.id))
 		{:error, changeset} ->
 			render(conn, "new.html", changeset: changeset)
 		end

@@ -5,6 +5,8 @@
     </div>
   <% end %>
 
+  <center><h3>Personal Details</h3></center>
+
   <div class="form-group">
     <%= label f, :name, class: "control-label" %>
     <%= text_input f, :name, class: "form-control" %>
@@ -67,6 +69,9 @@
     <%= text_input f, :license, class: "form-control" %>
     <%= error_tag f, :license %>
   </div>
+  <br>
+
+  <center><h3>Educational Details</h3></center>
 
   <div class="form-group">
     <%= label f, :qualification, class: "control-label" %>
@@ -97,6 +102,9 @@
     <%= file_input f, :document %>
     <%= error_tag f, :document %>
   </div>
+  <br>
+
+  <center><h3>Tuition Details</h3></center>
 
   <div class="form-group">
     <%= label f, :teaching, class: "control-label" %>

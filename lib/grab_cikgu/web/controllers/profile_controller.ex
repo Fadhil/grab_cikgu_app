@@ -3,6 +3,7 @@ defmodule GrabCikgu.Web.ProfileController do
 require IEx
   alias GrabCikgu.Account
   alias GrabCikgu.Account.Profile
+  alias GrabCikgu.User
 
   def index(conn, _params) do
     profiles = Account.list_profiles()
@@ -26,21 +27,14 @@ require IEx
   end
 
   def show(conn, %{"id" => id}) do
-
-    profile = %Profile{}
+    user = Repo.get(User, id)
+    profile = Account.get_user_profile(user)
     render(conn, "show.html", profile: profile)
   end
 
   def show_profile(conn, _params) do
-    profile = Account.get_current_user_profile(conn.assigns.current_user)
-
+    profile = Account.get_user_profile(conn.assigns.current_user)
     render(conn, "show.html", profile: profile)
-  end
-
-  def edit_profile(conn, _params) do
-    profile = Account.get_current_user_profile(conn.assigns.current_user)
-    changeset = Account.change_profile(profile)
-    render(conn, "edit.html", profile: profile, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -49,9 +43,14 @@ require IEx
     render(conn, "edit.html", profile: profile, changeset: changeset)
   end
 
+  def edit_profile(conn, _params) do
+    profile = Account.get_user_profile(conn.assigns.current_user)
+    changeset = Account.change_profile(profile)
+    render(conn, "edit.html", profile: profile, changeset: changeset)
+  end
+
   def update(conn, %{"id" => id, "profile" => profile_params}) do
     profile = Account.get_profile!(id)
-
     case Account.update_profile(profile, profile_params) do
       {:ok, profile} ->
         conn

@@ -14,7 +14,7 @@ defmodule GrabCikgu.Web.SessionController do
 			  |> redirect(to: page_path(conn, :index))
 			{:error, _reason, conn} ->
 			  conn
-			  |> put_flash(:error, "Invalid! Invalid! Invalid!")
+			  |> put_flash(:error, "Invalid! Please try again.")
 			  |> render("new.html")
 		end
 	end

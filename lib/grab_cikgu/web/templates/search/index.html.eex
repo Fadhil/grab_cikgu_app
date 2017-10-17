@@ -1,0 +1,27 @@
+
+<h2> Search Results </h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>City</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for result <- @results do %>
+    <tr>
+      <td><%= result.name %></td>
+      <td><%= result.city %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: search_path(@conn, :show, result), class: "btn btn-default btn-xs" %></span>
+        
+      </td>
+    </tr>
+    </tbody>
+</table>
+<% end %>
+

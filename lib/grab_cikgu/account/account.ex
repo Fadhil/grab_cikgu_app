@@ -198,14 +198,13 @@ defmodule GrabCikgu.Account do
     Profile.changeset(profile, %{})
   end
 
-  def get_current_user_profile(user) do
+  def get_user_profile(user) do
     user = user |> Repo.preload(:profile)
     if user.profile == nil do
       profile = Ecto.build_assoc(user, :profile)
     else
       profile = user.profile
     end
-
     profile
   end
 
