@@ -39,6 +39,11 @@
         <span class="logo"></span>
       </header>
 
+      <%= form_for @conn, search_path(@conn, :index), [name: :search], fn f -> %>
+        <%= text_input f, :query %>
+        <%= submit "Search" %>
+      <% end %>
+
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
@@ -89,17 +94,14 @@
           <body>
 
           <div class="sidenav">
-            <a href="#">Home</a>
-            <a href="#">Profile</a>
+            <a href="/users">Home</a>
+            <a href="/manage/profiles">Profile</a>
             <a href="#">Class</a>
             <a href="#">Message</a>
             <a href="#">Account</a>
           </div>
 
-      <%= form_for @conn, search_path(@conn, :index), [name: :search], fn f -> %>
-        <%= text_input f, :query, placeholder: "City / Subject / Keyword" %>
-        <%= submit "Search" %>
-      <% end %>
+      
 
           </body>
 

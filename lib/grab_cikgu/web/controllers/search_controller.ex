@@ -8,9 +8,11 @@ defmodule GrabCikgu.Web.SearchController do
 
 	def index(conn, %{"search" => %{"query" => query}}) do
 		query_string = "%#{query}%"
-		query = from u in User, join: p in Profile, 
-				where: p.user_id == u.id and ilike(p.area, ^query_string)
-		results = Repo.all(query)
+
+		query = from u in User, join: p in assoc(u, :profile), 
+			where: ilike(p.area, ^query_string)
+ 
+		results = Repo.all(query) |> Repo.preload(:profile)
 		render(conn, "index.html", results: results)
   	end
 

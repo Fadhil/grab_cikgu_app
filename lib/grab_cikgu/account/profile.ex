@@ -4,6 +4,7 @@ defmodule GrabCikgu.Account.Profile do
   import Ecto.Changeset
   alias GrabCikgu.Document
   alias GrabCikgu.Account.Profile
+  alias GrabCikgu.User
 
 
   schema "account_profiles" do

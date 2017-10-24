@@ -2,6 +2,7 @@ defmodule GrabCikgu.Profile do
   use GrabCikgu.Web, :model
   use Arc.Ecto.Model
   alias GrabCikgu.Document
+  alias GrabCikgu.User
 
 
   schema "profiles" do
@@ -33,6 +34,7 @@ defmodule GrabCikgu.Profile do
   @optional_fields ~w(name icno gender age job status state city license 
                       qualification achievement experience about
                       teaching area tuitioncenter)
+  @all_fields @optional_fields
 
   @required_file_fields ~w()
   @optional_file_fields ~w(document)
@@ -46,7 +48,7 @@ defmodule GrabCikgu.Profile do
 
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @all_fields)
     |> cast_attachments(params, @required_file_fields, @optional_file_fields)
   end
 

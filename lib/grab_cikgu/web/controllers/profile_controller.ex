@@ -4,6 +4,8 @@ require IEx
   alias GrabCikgu.Account
   alias GrabCikgu.Account.Profile
   alias GrabCikgu.User
+  alias GrabCikgu.Repo
+  alias GrabCikgu.Account.Role
 
   def index(conn, _params) do
     profiles = Account.list_profiles()
@@ -38,7 +40,8 @@ require IEx
   end
 
   def edit(conn, %{"id" => id}) do
-    profile = Account.get_profile!(id)
+    user = Repo.get(User, id)
+    profile = Account.get_user_profile(user)
     changeset = Account.change_profile(profile)
     render(conn, "edit.html", profile: profile, changeset: changeset)
   end
@@ -62,7 +65,7 @@ require IEx
   end
 
   def update_profile(conn, %{"profile" => profile_params}) do
-    profile = Account.get_current_user_profile(conn.assigns.current_user)
+    profile = Account.get_user_profile(conn.assigns.current_user)
     case Account.update_profile(profile, profile_params) do
       {:ok, profile} ->
         conn

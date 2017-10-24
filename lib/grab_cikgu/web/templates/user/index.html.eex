@@ -1,11 +1,12 @@
-<h1>Listing Users</h1>
+<h2>Listing Users</h2>
 
 <table class="table">
 	<%= for user <- @users do %>
 		<tr>
 			<td><br><%= render "user.html", user: user %></br></td>
-			<td><br><%= link "View", to: user_path(@conn, :show, user.id) %></br></td>
-			<td><br><%= link "Profile", to: profile_path(@conn, :show, user.id) %></br></td>
+			<td><br><%= link "View", to: user_path(@conn, :show, user.id), class: "btn btn-sm" %></br></td>
+			<td><br><%= link "Profile", to: profile_path(@conn, :show, user.id), class: "btn btn-primary btn-sm" %></br></td>
+			<td><br><%= link "Choose This Tutor", to: profile_path(@conn, :show, user.id), class: "btn btn-success btn-sm" %></br></td>
 		</tr>
 	<% end %>
 </table>
