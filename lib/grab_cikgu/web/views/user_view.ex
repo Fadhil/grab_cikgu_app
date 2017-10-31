@@ -1,6 +1,6 @@
 defmodule GrabCikgu.Web.UserView do 
 	use GrabCikgu.Web, :view
-	alias GrabCikgu.User
+	alias GrabCikgu.Account.User
 
 	def first_name(%user{name: name}) do
 		name

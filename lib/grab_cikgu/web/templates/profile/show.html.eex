@@ -1,0 +1,126 @@
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div class="container">
+  <ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#profile">Profile</a></li>
+    <li><a data-toggle="pill" href="#education">Education </a></li>
+    <li><a data-toggle="pill" href="#tuition">Tuition</a></li>
+    <li><a data-toggle="pill" href="#performance">Performance</a></li>
+  </ul>
+
+
+
+  <div class="tab-content">
+    <div id="profile" class="tab-pane fade in active">
+      <h3>-- Personal Details --</h3>
+      <br>
+	  <ul>
+		<li>
+    		Name:
+    		<strong><%= @profile.name %></strong>
+  		</li>
+  		<li>
+    		Ic No:
+    		<strong><%= @profile.icno %></strong>
+  		</li>
+  		<li>
+    		Gender:
+    		<strong><%= @profile.gender %></strong>
+  		</li>
+  		<li>
+    		Age:
+    		<strong><%= @profile.age %></strong>
+  		</li>
+  		<li>
+    		Occupation:
+    		<strong><%= @profile.job %></strong>
+  		</li>
+  		<li>
+    		Tutor Status:
+    		<strong><%= @profile.status %></strong>
+  		</li>
+      <li>
+        State:
+        <strong><%= @profile.state %></strong>
+      </li>
+  		<li>
+    		City:
+    		<strong><%= @profile.city %></strong>
+  		</li>
+  		<li>
+    		Tutor License:
+    		<strong><%= @profile.license %></strong>
+  		</li>
+	  </ul>
+    </div>
+
+
+    <div id="education" class="tab-pane fade">
+      <h3>-- Educational Background --</h3>
+      <br>
+      <ul>
+      	<li>
+        Qualification:
+        <strong><%= @profile.qualification %></strong>
+        </li>
+
+        <li>
+        Achievement:
+        <strong><%= @profile.achievement %></strong>
+        </li>
+
+        <li>
+        Experience:
+        <strong><%= @profile.experience %></strong>
+        </li>
+
+        <li>
+        About:
+        <strong><%= @profile.about %></strong>
+        </li>
+
+        <li>
+        Attachment(s):
+        <a href ="/<%= GrabCikgu.Document.url({@profile.document, @profile}) %>">View</a>
+          <!--//<img width="50px" src="/<%= # GrabCikgu.Document.url({@profile.document, @profile}) %>"/> //-->
+        </li>
+
+  	  </ul>
+    </div>
+
+
+    <div id="tuition" class="tab-pane fade">
+      <h3>Tutorial Details</h3>
+      <br>
+      <ul>
+        <li>
+        Teaching:
+        <strong><%= @profile.teaching %></strong>
+
+        <li>
+        Area Covered:
+        <strong><%= @profile.area %></strong>
+        </li>
+
+        <li>
+        Will teach at Tuition Center:
+        <strong><%= @profile.tuitioncenter %></strong>
+        </li>
+
+      </ul>
+    </div>
+    <div id="performance" class="tab-pane fade">
+      <h3>Performance</h3>
+      <p>Rating</p>
+      <p>Credit Hours</p>
+    </div>
+  </div>
+</div>
+
+<span><%= link "Edit", to: profile_path(@conn, :edit_profile) %></span>
+|
+<span><%= link "Back", to: user_path(@conn, :index) %></span>

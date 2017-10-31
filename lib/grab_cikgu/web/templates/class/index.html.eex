@@ -1,0 +1,78 @@
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <h2>Listing Classes</h2>
+
+  <div class="container">
+  <ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#newrequest">New Request</a></li>
+    <li><a data-toggle="pill" href="#schedule">Schedule</a></li>
+    <li><a data-toggle="pill" href="#ongoing">Ongoing</a></li>
+    <li><a data-toggle="pill" href="#cancelled">Cancelled</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="newrequest" class="tab-pane fade in active">
+    <br>
+    <ul>
+      <li>
+          Qualification:
+        <strong><%=# @profile.qualification %></strong>
+      </li>
+    </ul>
+    </div>
+
+    <div id="schedule" class="tab-pane fade">
+    <table class="table">
+    <thead>
+    <tr>
+      <th>Tutor</th>
+      <th>Student</th>
+      <th>Subject</th>
+
+      <th></th>
+    </tr>
+    </thead>
+      <tbody>
+          <%= for class <- @classes do %>
+          <tr>
+            <td><%=# profile.name %></td>
+            <td><%=# profile.city %></td>
+
+            <td><%= class.subject %></td>
+            <td class="text-right">
+              <span><%= link "Show", to: class_path(@conn, :show, class), class: "btn btn-default btn-xs" %></span>
+              <span><%= link "Edit", to: class_path(@conn, :edit, class), class: "btn btn-default btn-xs" %></span>
+              <span><%= link "Delete", to: class_path(@conn, :delete, class), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+            </td>
+          </tr>
+          <% end %>
+      </tbody>
+    </table>
+    </div>
+
+    <div id="ongoing" class="tab-pane fade">
+      <br>
+      <ul>
+        <li>
+        Teaching:
+        <strong><%=# @profile.teaching %></strong>
+        </li>
+      </ul>
+    </div>
+
+
+    <div id="cancelled" class="tab-pane fade">
+      <p>Rating</p>
+      <p>Credit Hours</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<span><%= link "New Class", to: class_path(@conn, :new) %></span>

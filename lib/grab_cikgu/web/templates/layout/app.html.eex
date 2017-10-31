@@ -25,9 +25,8 @@
         <% end %>
       </ol>
     </div>
-      
-    </div> <!-- /header -->
 
+    </div> <!-- /header -->
     <div class="container">
       <header class="header">
         <nav role="navigation">
@@ -38,12 +37,68 @@
         <span class="logo"></span>
       </header>
 
+      <%= form_for @conn, search_path(@conn, :index), [name: :search], fn f -> %>
+        <%= text_input f, :query %>
+        <%= submit "Search" %>
+      <% end %>
+
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
+
+      <!-- /NAVIGATION BAR -->
+
+      <style>
+
+          .sidenav {
+              height: 100%;
+              width: 200px;
+              position: fixed;
+              z-index: 1;
+              top: 0;
+              left: 0;
+              background-color: #111;
+              overflow-x: hidden;
+              padding-top: 20px;
+          }
+
+          .sidenav a {
+              padding: 6px 6px 6px 32px;
+              text-decoration: none;
+              font-size: 25px;
+              color: #818181;
+              display: block;
+          }
+
+          .sidenav a:hover {
+              color: #f1f1f1;
+          }
+
+          .main {
+              margin-left: 200px; /* Same as the width of the sidenav */
+          }
+
+          @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+          }
+          </style>
+          </head>
+          <body>
+
+          <div class="sidenav">
+            <a href="/users">Home</a>
+            <a href="/manage/profile">Profile</a>
+            <a href="#">Class</a>
+            <a href="#">Message</a>
+            <a href="#">Account</a>
+          </div>
+        </body>
+
+      <!-- /NAVIGATION BAR ENDS-->
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

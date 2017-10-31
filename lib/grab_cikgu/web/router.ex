@@ -22,12 +22,21 @@ defmodule GrabCikgu.Web.Router do
     resources "/users", UserController, only: [:index, :show, :new, :create]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     resources "/videos", VideoController
+    post "/search", SearchController, :index
   end
 
   scope "/manage", GrabCikgu.Web do
     pipe_through [:browser, :authenticate_user]
-
     resources "/videos", VideoController
+    resources "/profiles", ProfileController
+    resources "/requests", RequestController
+    resources "/classes", ClassController
+    get "/profile", ProfileController, :show_profile
+    get "/profile/edit", ProfileController, :edit_profile
+    put "/profile/update", ProfileController, :update_profile
+    get "/profile/student/edit", StudentProfileController, :edit_profile
+    put "/profile/student/update", StudentProfileController, :update_profile
+
   end
 
   # Other scopes may use custom stacks.

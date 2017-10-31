@@ -1,39 +1,56 @@
 defmodule GrabCikgu.Web.UserController do
 	use GrabCikgu.Web, :controller
 	alias GrabCikgu.Repo
-	
+  alias GrabCikgu.Account
+	alias GrabCikgu.Account.Role
+	alias GrabCikgu.Account.Profile
+	require IEx
 	plug :authenticate_user when action in [:index, :show]
-	
+	plug :load_roles when action in [:new, :create, :edit, :update]
+
+	defp load_roles(conn, _) do
+		query =
+		  Role
+		  |> Role.alphabetical
+		  |> Role.names_and_ids
+		roles = Repo.all query
+		assign(conn, :roles, roles)
+	end
 
 	def index(conn, _params) do
-		users = Repo.all(GrabCikgu.User)
+		users = Repo.all(GrabCikgu.Account.User) |> Repo.preload(:profile)
 		render conn, "index.html", users: users
 	end
 
-	alias GrabCikgu.User
+	alias GrabCikgu.Account.User
 	def new(conn, _params) do
 		changeset = User.changeset(%User{})
 		render conn, "new.html", changeset: changeset
 	end
 
 	def create(conn, %{"user" => user_params}) do
-		changeset = User.registration_changeset(%User{}, user_params)
-		case Repo.insert(changeset) do
+		changeset_user = User.registration_changeset(%User{}, user_params)
+		role = Repo.get(Role, user_params["role_id"])
+    changeset_user_profile = Account.generate_blank_profile(changeset_user, role)
+		changeset_role = Role.changeset(role, %{})
+		changeset_user_profile_role = Ecto.Changeset.put_assoc(changeset_user_profile, :role, changeset_role)
+
+		case Repo.insert(changeset_user_profile_role) do
 		{:ok, user} ->
 			conn
 			|> GrabCikgu.Web.Auth.login(user)
 			|> put_flash(:info, "#{user.name} created!")
-			|> redirect(to: user_path(conn, :index))
+			|> redirect(to: user_path(conn, :show, user.id))
 		{:error, changeset} ->
 			render(conn, "new.html", changeset: changeset)
 		end
 	end
 
 	def show(conn, %{"id" => id}) do
-		user = Repo.get(GrabCikgu.User, id)
+		user = Repo.get(GrabCikgu.Account.User, id)
 		render conn, "show.html", user: user
 	end
-	
+
 	defp authenticate(conn, _opts) do
 		if conn.assigns.current_user do
 			conn

@@ -1,0 +1,51 @@
+<h2>Show Class</h2>
+
+<div class="container">
+  <ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#newrequest">New Request</a></li>
+    <li><a data-toggle="pill" href="#schedule">Schedule</a></li>
+    <li><a data-toggle="pill" href="#ongoing">Ongoing</a></li>
+    <li><a data-toggle="pill" href="#cancelled">Cancelled</a></li>
+  </ul>
+ 
+  <div class="tab-content">
+    <div id="newrequest" class="tab-pane fade in active">
+    <br>
+    <ul>
+      <li>
+    <strong>Subject:</strong>
+    <%= @class.subject %>
+  </li>
+    </ul>
+    </div>
+
+
+    <div id="schedule" class="tab-pane fade in active">
+      <br>
+      <ul>
+        <li>
+        <strong>Schedule</strong>
+        </li>
+      </ul>
+    </div>
+
+
+    <div id="ongoing" class="tab-pane fade">
+      <br>
+      <ul>
+        <li>
+        <strong>Teaching</strong>
+        </li>
+      </ul>
+    </div>
+
+
+    <div id="cancelled" class="tab-pane fade">
+      <p>Rating</p>
+      <p>Credit Hours</p>
+    </div>
+  </div>
+</div>
+
+<span><%= link "Edit", to: class_path(@conn, :edit, @class) %></span>
+<span><%= link "Back", to: class_path(@conn, :index) %></span>

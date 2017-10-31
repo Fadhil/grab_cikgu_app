@@ -1,0 +1,131 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <center><h3>Personal Details</h3></center>
+
+  <div class="form-group">
+    <%= label f, :name, class: "control-label" %>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :ic_no, class: "control-label" %>
+    <%= text_input f, :icno, class: "form-control" %>
+    <%= error_tag f, :icno %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :gender, class: "control-label" %>
+    <%= select f, :gender, ["Select", "Male": "Male", "Female": "Female"] %>
+    <%= error_tag f, :gender %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :age, class: "control-label" %>
+    <%= text_input f, :age, class: "form-control" %>
+    <%= error_tag f, :age %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :job, class: "control-label" %>
+    <%= text_input f, :job, class: "form-control" %>
+    <%= error_tag f, :job %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :tutor_status, class: "control-label" %>
+    <%= select f, :status, ["Select", "Part-Time": "Part-Time", "Full-Time": "Full-Time"] %>
+    <%= error_tag f, :status %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :state, class: "control-label" %>
+    <%= select f, :state, 
+    ["Select", 
+    "Selangor": "Selangor", 
+    "Putrajaya": "Putrajaya",
+    "Kuala Lumpur": "Kuala Lumpur",
+    "Negeri Sembilan": "Negeri Sembilan",
+    "Melaka": "Melaka",
+    "Perak": "Perak",
+    "Kedah": "Kedah",
+    "Pulau Pinang": "Pulau Pinang"] %>
+    <%= error_tag f, :state %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :city, class: "control-label" %>
+    <%= text_input f, :city, class: "form-control" %>
+    <%= error_tag f, :city %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :license, class: "control-label" %>
+    <%= text_input f, :license, class: "form-control" %>
+    <%= error_tag f, :license %>
+  </div>
+  <br>
+
+  <center><h3>Educational Details</h3></center>
+
+  <div class="form-group">
+    <%= label f, :qualification, class: "control-label" %>
+    <%= text_input f, :qualification, class: "form-control" %>
+    <%= error_tag f, :qualification %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :achievement, class: "control-label" %>
+    <%= text_input f, :achievement, class: "form-control" %>
+    <%= error_tag f, :achievement %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :experience, class: "control-label" %>
+    <%= text_input f, :experience, class: "form-control" %>
+    <%= error_tag f, :experience %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :about, class: "control-label" %>
+    <%= text_input f, :about, class: "form-control" %>
+    <%= error_tag f, :about %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :document, class: "control-label" %>
+    <%= file_input f, :document %>
+    <%= error_tag f, :document %>
+  </div>
+  <br>
+
+  <center><h3>Tuition Details</h3></center>
+
+  <div class="form-group">
+    <%= label f, :teaching, class: "control-label" %>
+    <%= text_input f, :teaching, class: "form-control" %>
+    <%= error_tag f, :teaching %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :area_covered, class: "control-label" %>
+    <%= text_input f, :area, class: "form-control" %>
+    <%= error_tag f, :area %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :teach_at_tuition_center, class: "control-label" %>
+    <%= select f, :tuitioncenter, ["Yes or No", "Yes": "Yes", "No": "No"] %>
+    <%= error_tag f, :tuitioncenter %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+
+  <% end %>
