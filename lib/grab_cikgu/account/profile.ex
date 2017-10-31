@@ -4,7 +4,7 @@ defmodule GrabCikgu.Account.Profile do
   import Ecto.Changeset
   alias GrabCikgu.Document
   alias GrabCikgu.Account.Profile
-  alias GrabCikgu.User
+  alias GrabCikgu.Account.User
 
 
   schema "account_profiles" do
@@ -28,12 +28,12 @@ defmodule GrabCikgu.Account.Profile do
     field :area, :string
     field :tuitioncenter, :string
 
-    belongs_to :user, GrabCikgu.User, foreign_key: :user_id
+    belongs_to :user, GrabCikgu.Account.User, foreign_key: :user_id
     timestamps()
   end
 
   @required_fields ~w()
-  @optional_fields ~w(name icno gender age job status state city license 
+  @optional_fields ~w(name icno gender age job status state city license
                       qualification achievement experience about
                       teaching area tuitioncenter)
   @all_fields @optional_fields

@@ -1,4 +1,4 @@
-defmodule GrabCikgu.User do
+defmodule GrabCikgu.Account.User do
 	use GrabCikgu.Web, :model
 
 	schema "users" do

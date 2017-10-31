@@ -3,7 +3,7 @@ defmodule GrabCikgu.Web.ProfileController do
 require IEx
   alias GrabCikgu.Account
   alias GrabCikgu.Account.Profile
-  alias GrabCikgu.User
+  alias GrabCikgu.Account.User
   alias GrabCikgu.Repo
   alias GrabCikgu.Account.Role
 

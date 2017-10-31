@@ -4,7 +4,7 @@ defmodule GrabCikgu.Web.SearchController do
 	alias GrabCikgu.Account
 	alias GrabCikgu.Account.Role
 	alias GrabCikgu.Account.Profile
-	alias GrabCikgu.User
+	alias GrabCikgu.Account.User
 
 	def index(conn, %{"search" => %{"query" => query}}) do
 		query_string = "%#{query}%"

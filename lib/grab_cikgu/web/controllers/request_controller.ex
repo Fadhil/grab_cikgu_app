@@ -6,7 +6,7 @@ defmodule GrabCikgu.Web.RequestController do
   alias GrabCikgu.Account
   alias GrabCikgu.Account.Role
   alias GrabCikgu.Account.Profile
-  alias GrabCikgu.User
+  alias GrabCikgu.Account.User
 
   def index(conn, _params) do
     requests = Tutorial.list_requests()

@@ -6,7 +6,7 @@ defmodule GrabCikgu.Account.Role do
 
   schema "roles" do
     field :name, :string
-    has_many :users, GrabCikgu.User
+    has_many :users, GrabCikgu.Account.User
     has_many :profiles, GrabCikgu.Account.Profile
     timestamps()
   end

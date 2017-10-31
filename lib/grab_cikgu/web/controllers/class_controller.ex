@@ -4,7 +4,7 @@ defmodule GrabCikgu.Web.ClassController do
   alias GrabCikgu.Tutorial
   alias GrabCikgu.Account
   alias GrabCikgu.Account.Profile
-  alias GrabCikgu.User
+  alias GrabCikgu.Account.User
   alias GrabCikgu.Repo
   alias GrabCikgu.Account.Role
 

@@ -5,7 +5,7 @@ defmodule GrabCikgu.Video do
     field :url, :string
     field :title, :string
     field :description, :string
-    belongs_to :user, GrabCikgu.User, foreign_key: :user_id
+    belongs_to :user, GrabCikgu.Account.User, foreign_key: :user_id
 
     timestamps()
   end

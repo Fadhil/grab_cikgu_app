@@ -2,7 +2,7 @@ defmodule GrabCikgu.Profile do
   use GrabCikgu.Web, :model
   use Arc.Ecto.Model
   alias GrabCikgu.Document
-  alias GrabCikgu.User
+  alias GrabCikgu.Account.User
 
 
   schema "profiles" do
@@ -25,7 +25,7 @@ defmodule GrabCikgu.Profile do
     field :area, :string
     field :tuitioncenter, :string
   
-    belongs_to :user, GrabCikgu.User, foreign_key: :user_id
+    belongs_to :user, GrabCikgu.Account.User, foreign_key: :user_id
 
     timestamps()
   end

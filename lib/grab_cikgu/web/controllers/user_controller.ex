@@ -17,11 +17,11 @@ defmodule GrabCikgu.Web.UserController do
 	end
 
 	def index(conn, _params) do
-		users = Repo.all(GrabCikgu.User) |> Repo.preload(:profile)
+		users = Repo.all(GrabCikgu.Account.User) |> Repo.preload(:profile)
 		render conn, "index.html", users: users
 	end
 
-	alias GrabCikgu.User
+	alias GrabCikgu.Account.User
 	def new(conn, _params) do
 		changeset = User.changeset(%User{})
 		render conn, "new.html", changeset: changeset
@@ -47,7 +47,7 @@ defmodule GrabCikgu.Web.UserController do
 	end
 
 	def show(conn, %{"id" => id}) do
-		user = Repo.get(GrabCikgu.User, id)
+		user = Repo.get(GrabCikgu.Account.User, id)
 		render conn, "show.html", user: user
 	end
 	
