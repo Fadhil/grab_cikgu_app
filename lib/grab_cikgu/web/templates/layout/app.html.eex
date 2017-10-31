@@ -26,8 +26,6 @@
       </ol>
     </div>
 
-
-      
     </div> <!-- /header -->
     <div class="container">
       <header class="header">
@@ -51,12 +49,10 @@
         <%= render @view_module, @view_template, assigns %>
       </main>
 
-
-
       <!-- /NAVIGATION BAR -->
 
       <style>
-          
+
           .sidenav {
               height: 100%;
               width: 200px;
@@ -95,24 +91,16 @@
 
           <div class="sidenav">
             <a href="/users">Home</a>
-            <a href="/manage/profiles">Profile</a>
+            <a href="/manage/profile">Profile</a>
             <a href="#">Class</a>
             <a href="#">Message</a>
             <a href="#">Account</a>
           </div>
-
-      
-
-          </body>
+        </body>
 
       <!-- /NAVIGATION BAR ENDS-->
 
-      
-
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-
-   
-
   </body>
 </html>
