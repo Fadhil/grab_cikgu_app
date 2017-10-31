@@ -11,7 +11,7 @@
 # and so on) as they will fail if something goes wrong.
 
 alias GrabCikgu.Repo
-alias GrabCikgu.Role
+alias GrabCikgu.Account.Role
 
 for role <- ~w(Admin Tutor Student) do
   Repo.get_by(Role, name: role) ||
