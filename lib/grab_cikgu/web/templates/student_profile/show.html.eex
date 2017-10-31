@@ -9,7 +9,7 @@
 
   <li>
     <strong>Ic no:</strong>
-    <%= @student_profile.ic_no %>
+    <%= @student_profile.icno %>
   </li>
 
   <li>
@@ -34,5 +34,5 @@
 
 </ul>
 
-<span><%=# link "Edit", to: student_profile_path(@conn, :edit, @student_profile) %></span>
+<span><%= link "Edit", to: student_profile_path(@conn, :edit_profile) %></span>
 <span><%=# link "Back", to: student_profile_path(@conn, :index) %></span>

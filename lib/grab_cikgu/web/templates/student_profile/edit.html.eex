@@ -1,5 +1,4 @@
 <h2>Edit Student profile</h2>
-
-<%=# render "form.html", changeset: @changeset, action: student_profile_path(@conn, :update, @student_profile) %>
+<%= render "form.html", changeset: @changeset, action: student_profile_path(@conn, :update_profile) %>
 
 <span><%=# link "Back", to: student_profile_path(@conn, :index) %></span>

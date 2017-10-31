@@ -12,9 +12,9 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :ic_no, class: "control-label" %>
-    <%= text_input f, :ic_no, class: "form-control" %>
-    <%= error_tag f, :ic_no %>
+    <%= label f, :icno, class: "control-label" %>
+    <%= text_input f, :icno, class: "form-control" %>
+    <%= error_tag f, :icno %>
   </div>
 
   <div class="form-group">

@@ -36,7 +36,12 @@ require IEx
 
   def show_profile(conn, _params) do
     profile = Account.get_user_profile(conn.assigns.current_user)
-    render(conn, "show.html", profile: profile)
+    case conn.assigns.current_user.role.name do
+      "Tutor" ->
+        render(conn, "show.html", profile: profile)
+      "Student" ->
+        render(conn, GrabCikgu.Web.StudentProfileView, "show.html", student_profile: profile)
+    end
   end
 
   def edit(conn, %{"id" => id}) do
@@ -70,7 +75,7 @@ require IEx
       {:ok, profile} ->
         conn
         |> put_flash(:info, "Profile updated successfully.")
-        |> redirect(to: profile_path(conn, :show_profile))    
+        |> redirect(to: profile_path(conn, :show_profile))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", changeset: changeset)
     end

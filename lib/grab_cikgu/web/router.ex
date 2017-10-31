@@ -34,6 +34,8 @@ defmodule GrabCikgu.Web.Router do
     get "/profile", ProfileController, :show_profile
     get "/profile/edit", ProfileController, :edit_profile
     put "/profile/update", ProfileController, :update_profile
+    get "/profile/student/edit", StudentProfileController, :edit_profile
+    put "/profile/student/update", StudentProfileController, :update_profile
 
   end
 

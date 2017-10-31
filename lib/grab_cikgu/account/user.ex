@@ -1,43 +1,44 @@
 defmodule GrabCikgu.Account.User do
-	use GrabCikgu.Web, :model
+  use GrabCikgu.Web, :model
 
-	schema "users" do
-		field :name, :string
-		field :username, :string
-		field :password, :string, virtual: true
-		field :password_hash, :string
-		has_many :videos, GrabCikgu.Video
-		has_one :profile, GrabCikgu.Account.Profile
-		belongs_to :role, GrabCikgu.Account.Role, on_replace: :nilify
+  schema "users" do
+    field :name, :string
+    field :username, :string
+    field :password, :string, virtual: true
+    field :password_hash, :string
+    has_many :videos, GrabCikgu.Video
+    has_one :profile, GrabCikgu.Account.Profile
+    belongs_to :role, GrabCikgu.Account.Role, on_replace: :nilify
+    has_one :student_profile, GrabCikgu.Account.StudentProfile
 
-		timestamps
-	end
+    timestamps
+  end
 
-	
-	@optional_fields ~w(role_id)
 
-	def changeset(model, params \\ %{}) do
-		model
-		|> cast(params, ~w(name username))
-		|> validate_required([:name, :username])
-		|> validate_length(:username, min: 1, max: 20)
-	end
+  @optional_fields ~w(role_id)
 
-	def registration_changeset(model, params) do
-		model
-		|> changeset(params)
-		|> cast(params, ~w(password))
-		|> validate_length(:password, min: 6, max: 100)
-		|> put_pass_hash()
-	end
+  def changeset(model, params \\ %{}) do
+    model
+    |> cast(params, ~w(name username))
+    |> validate_required([:name, :username])
+    |> validate_length(:username, min: 1, max: 20)
+  end
 
-	defp put_pass_hash(changeset) do
-		case changeset do
-			%Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
-				put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
-			_ ->
-				changeset
-		end
-	end
-	
+  def registration_changeset(model, params) do
+    model
+    |> changeset(params)
+    |> cast(params, ~w(password))
+    |> validate_length(:password, min: 6, max: 100)
+    |> put_pass_hash()
+  end
+
+  defp put_pass_hash(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
+        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
+      _ ->
+        changeset
+    end
+  end
+
 end

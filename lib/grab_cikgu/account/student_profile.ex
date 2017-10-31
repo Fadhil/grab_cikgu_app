@@ -8,9 +8,10 @@ defmodule GrabCikgu.Account.StudentProfile do
     field :age, :integer
     field :gender, :string
     field :grade, :string
-    field :ic_no, :string
+    field :icno, :string
     field :name, :string
     field :school, :string
+    belongs_to :user, GrabCikgu.Account.User, foreign_key: :user_id
 
     timestamps()
   end
@@ -18,7 +19,6 @@ defmodule GrabCikgu.Account.StudentProfile do
   @doc false
   def changeset(%StudentProfile{} = student_profile, attrs) do
     student_profile
-    |> cast(attrs, [:name, :ic_no, :gender, :age, :grade, :school])
-    |> validate_required([:name, :ic_no, :gender, :age, :grade, :school])
+    |> cast(attrs, [:name, :icno, :gender, :age, :grade, :school])
   end
 end

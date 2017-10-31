@@ -169,6 +169,7 @@ defmodule GrabCikgu.Account do
     |> Repo.update()
   end
 
+
   @doc """
   Deletes a Profile.
 
@@ -199,11 +200,20 @@ defmodule GrabCikgu.Account do
   end
 
   def get_user_profile(user) do
-    user = user |> Repo.preload(:profile)
-    if user.profile == nil do
-      profile = Ecto.build_assoc(user, :profile)
-    else
-      profile = user.profile
+    user = user |> Repo.preload([:profile, :student_profile, :role])
+    profile = case user.role.name do
+      "Tutor" ->
+        if user.profile == nil do
+          Ecto.build_assoc(user, :profile)
+        else
+          user.profile
+        end
+      "Student" ->
+        if user.student_profile == nil do
+          Ecto.build_assoc(user, :student_profile)
+        else
+          user.student_profile
+        end
     end
     profile
   end
@@ -312,5 +322,18 @@ defmodule GrabCikgu.Account do
   """
   def change_student_profile(%StudentProfile{} = student_profile) do
     StudentProfile.changeset(student_profile, %{})
+  end
+
+  def generate_blank_profile(changeset_user, role) do
+    cup = case role.name do
+      "Tutor" ->
+        changeset_profile = Profile.changeset(%Profile{}, %{})
+        changeset_user_profile = Ecto.Changeset.put_assoc(changeset_user, :profile, changeset_profile)
+        changeset_user_profile
+      "Student" ->
+        changeset_profile = StudentProfile.changeset(%StudentProfile{}, %{})
+        changeset_user_profile = Ecto.Changeset.put_assoc(changeset_user, :student_profile, changeset_profile)
+        changeset_user_profile
+    end
   end
 end

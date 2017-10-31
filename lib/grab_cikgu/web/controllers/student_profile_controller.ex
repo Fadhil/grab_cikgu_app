@@ -30,9 +30,16 @@ defmodule GrabCikgu.Web.StudentProfileController do
   end
 
   def edit(conn, %{"id" => id}) do
-    student_profile = Account.get_student_profile!(id)
+    student_profile = Account.get_user_profile(conn.assigns.current_user)
     changeset = Account.change_student_profile(student_profile)
     render(conn, "edit.html", student_profile: student_profile, changeset: changeset)
+  end
+
+  def edit_profile(conn, _) do
+    student_profile = Account.get_user_profile(conn.assigns.current_user)
+    changeset = Account.change_student_profile(student_profile)
+    render(conn, "edit.html", student_profile: student_profile, changeset: changeset)
+
   end
 
   def update(conn, %{"id" => id, "student_profile" => student_profile_params}) do
@@ -45,6 +52,18 @@ defmodule GrabCikgu.Web.StudentProfileController do
         # |> redirect(to: student_profile_path(conn, :show, student_profile))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", student_profile: student_profile, changeset: changeset)
+    end
+  end
+
+  def update_profile(conn, %{"student_profile" =>params}) do
+    profile = Account.get_user_profile(conn.assigns.current_user)
+    case Account.update_student_profile(profile, params) do
+      {:ok, profile} ->
+        conn
+        |> put_flash(:info, "Profile updated successfully.")
+        |> redirect(to: profile_path(conn, :show_profile))
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", changeset: changeset)
     end
   end
 

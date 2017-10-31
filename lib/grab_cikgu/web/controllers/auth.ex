@@ -22,7 +22,10 @@ defmodule GrabCikgu.Web.Auth do
 
 	def call(conn, repo) do
 		user_id = get_session(conn, :user_id)
-		user    = user_id && repo.get(GrabCikgu.Account.User, user_id)
+		user =
+      user_id &&
+      repo.get(GrabCikgu.Account.User, user_id)
+      |> repo.preload(:role)
 		assign(conn, :current_user, user)
 	end
 
@@ -36,6 +39,7 @@ defmodule GrabCikgu.Web.Auth do
 	def login_by_username_and_pass(conn, username, given_pass, opts) do
 		repo = Keyword.fetch!(opts, :repo)
 		user = repo.get_by(GrabCikgu.Account.User, username: username)
+
 
 		cond do
 			user && checkpw(given_pass, user.password_hash) ->

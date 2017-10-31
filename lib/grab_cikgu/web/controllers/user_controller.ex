@@ -1,6 +1,7 @@
 defmodule GrabCikgu.Web.UserController do
 	use GrabCikgu.Web, :controller
 	alias GrabCikgu.Repo
+  alias GrabCikgu.Account
 	alias GrabCikgu.Account.Role
 	alias GrabCikgu.Account.Profile
 	require IEx
@@ -29,12 +30,11 @@ defmodule GrabCikgu.Web.UserController do
 
 	def create(conn, %{"user" => user_params}) do
 		changeset_user = User.registration_changeset(%User{}, user_params)
-		changeset_profile = Profile.changeset(%Profile{}, %{})
-		changeset_user_profile = Ecto.Changeset.put_assoc(changeset_user, :profile, changeset_profile)
 		role = Repo.get(Role, user_params["role_id"])
+    changeset_user_profile = Account.generate_blank_profile(changeset_user, role)
 		changeset_role = Role.changeset(role, %{})
 		changeset_user_profile_role = Ecto.Changeset.put_assoc(changeset_user_profile, :role, changeset_role)
-		
+
 		case Repo.insert(changeset_user_profile_role) do
 		{:ok, user} ->
 			conn
@@ -50,7 +50,7 @@ defmodule GrabCikgu.Web.UserController do
 		user = Repo.get(GrabCikgu.Account.User, id)
 		render conn, "show.html", user: user
 	end
-	
+
 	defp authenticate(conn, _opts) do
 		if conn.assigns.current_user do
 			conn
