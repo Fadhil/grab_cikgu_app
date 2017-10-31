@@ -24,8 +24,8 @@
       </li>
     </ul>
     </div>
-  
-    <div id="schedule" class="tab-pane fade in active">
+
+    <div id="schedule" class="tab-pane fade">
     <table class="table">
     <thead>
     <tr>
@@ -73,6 +73,6 @@
 </div>
 
 
-  
+
 
 <span><%= link "New Class", to: class_path(@conn, :new) %></span>
