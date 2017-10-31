@@ -1,0 +1,38 @@
+<h2>Show Student profile</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @student_profile.name %>
+  </li>
+
+  <li>
+    <strong>Ic no:</strong>
+    <%= @student_profile.ic_no %>
+  </li>
+
+  <li>
+    <strong>Gender:</strong>
+    <%= @student_profile.gender %>
+  </li>
+
+  <li>
+    <strong>Age:</strong>
+    <%= @student_profile.age %>
+  </li>
+
+  <li>
+    <strong>Grade:</strong>
+    <%= @student_profile.grade %>
+  </li>
+
+  <li>
+    <strong>School:</strong>
+    <%= @student_profile.school %>
+  </li>
+
+</ul>
+
+<span><%=# link "Edit", to: student_profile_path(@conn, :edit, @student_profile) %></span>
+<span><%=# link "Back", to: student_profile_path(@conn, :index) %></span>

@@ -314,4 +314,74 @@ defmodule GrabCikgu.AccountTest do
       assert %Ecto.Changeset{} = Account.change_profile(profile)
     end
   end
+
+  describe "student_profiles" do
+    alias GrabCikgu.Account.StudentProfile
+
+    @valid_attrs %{age: 42, gender: "some gender", grade: "some grade", ic_no: "some ic_no", name: "some name", school: "some school"}
+    @update_attrs %{age: 43, gender: "some updated gender", grade: "some updated grade", ic_no: "some updated ic_no", name: "some updated name", school: "some updated school"}
+    @invalid_attrs %{age: nil, gender: nil, grade: nil, ic_no: nil, name: nil, school: nil}
+
+    def student_profile_fixture(attrs \\ %{}) do
+      {:ok, student_profile} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Account.create_student_profile()
+
+      student_profile
+    end
+
+    test "list_student_profiles/0 returns all student_profiles" do
+      student_profile = student_profile_fixture()
+      assert Account.list_student_profiles() == [student_profile]
+    end
+
+    test "get_student_profile!/1 returns the student_profile with given id" do
+      student_profile = student_profile_fixture()
+      assert Account.get_student_profile!(student_profile.id) == student_profile
+    end
+
+    test "create_student_profile/1 with valid data creates a student_profile" do
+      assert {:ok, %StudentProfile{} = student_profile} = Account.create_student_profile(@valid_attrs)
+      assert student_profile.age == 42
+      assert student_profile.gender == "some gender"
+      assert student_profile.grade == "some grade"
+      assert student_profile.ic_no == "some ic_no"
+      assert student_profile.name == "some name"
+      assert student_profile.school == "some school"
+    end
+
+    test "create_student_profile/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Account.create_student_profile(@invalid_attrs)
+    end
+
+    test "update_student_profile/2 with valid data updates the student_profile" do
+      student_profile = student_profile_fixture()
+      assert {:ok, student_profile} = Account.update_student_profile(student_profile, @update_attrs)
+      assert %StudentProfile{} = student_profile
+      assert student_profile.age == 43
+      assert student_profile.gender == "some updated gender"
+      assert student_profile.grade == "some updated grade"
+      assert student_profile.ic_no == "some updated ic_no"
+      assert student_profile.name == "some updated name"
+      assert student_profile.school == "some updated school"
+    end
+
+    test "update_student_profile/2 with invalid data returns error changeset" do
+      student_profile = student_profile_fixture()
+      assert {:error, %Ecto.Changeset{}} = Account.update_student_profile(student_profile, @invalid_attrs)
+      assert student_profile == Account.get_student_profile!(student_profile.id)
+    end
+
+    test "delete_student_profile/1 deletes the student_profile" do
+      student_profile = student_profile_fixture()
+      assert {:ok, %StudentProfile{}} = Account.delete_student_profile(student_profile)
+      assert_raise Ecto.NoResultsError, fn -> Account.get_student_profile!(student_profile.id) end
+    end
+
+    test "change_student_profile/1 returns a student_profile changeset" do
+      student_profile = student_profile_fixture()
+      assert %Ecto.Changeset{} = Account.change_student_profile(student_profile)
+    end
+  end
 end

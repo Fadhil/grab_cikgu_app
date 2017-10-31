@@ -101,7 +101,7 @@ defmodule GrabCikgu.Account do
     Video.changeset(video, %{})
   end
 
-  
+
   alias GrabCikgu.Account.Profile
 
   @doc """
@@ -217,4 +217,100 @@ defmodule GrabCikgu.Account do
   end
 
   def get_role!(id), do: Repo.get!(Role, id)
+
+  alias GrabCikgu.Account.StudentProfile
+
+  @doc """
+  Returns the list of student_profiles.
+
+  ## Examples
+
+      iex> list_student_profiles()
+      [%StudentProfile{}, ...]
+
+  """
+  def list_student_profiles do
+    Repo.all(StudentProfile)
+  end
+
+  @doc """
+  Gets a single student_profile.
+
+  Raises `Ecto.NoResultsError` if the Student profile does not exist.
+
+  ## Examples
+
+      iex> get_student_profile!(123)
+      %StudentProfile{}
+
+      iex> get_student_profile!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_student_profile!(id), do: Repo.get!(StudentProfile, id)
+
+  @doc """
+  Creates a student_profile.
+
+  ## Examples
+
+      iex> create_student_profile(%{field: value})
+      {:ok, %StudentProfile{}}
+
+      iex> create_student_profile(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_student_profile(attrs \\ %{}) do
+    %StudentProfile{}
+    |> StudentProfile.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a student_profile.
+
+  ## Examples
+
+      iex> update_student_profile(student_profile, %{field: new_value})
+      {:ok, %StudentProfile{}}
+
+      iex> update_student_profile(student_profile, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_student_profile(%StudentProfile{} = student_profile, attrs) do
+    student_profile
+    |> StudentProfile.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a StudentProfile.
+
+  ## Examples
+
+      iex> delete_student_profile(student_profile)
+      {:ok, %StudentProfile{}}
+
+      iex> delete_student_profile(student_profile)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_student_profile(%StudentProfile{} = student_profile) do
+    Repo.delete(student_profile)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking student_profile changes.
+
+  ## Examples
+
+      iex> change_student_profile(student_profile)
+      %Ecto.Changeset{source: %StudentProfile{}}
+
+  """
+  def change_student_profile(%StudentProfile{} = student_profile) do
+    StudentProfile.changeset(student_profile, %{})
+  end
 end

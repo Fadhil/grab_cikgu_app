@@ -11,7 +11,7 @@
     <li><a data-toggle="pill" href="#tuition">Tuition</a></li>
     <li><a data-toggle="pill" href="#performance">Performance</a></li>
   </ul>
-  
+
 
 
   <div class="tab-content">
@@ -121,5 +121,6 @@
   </div>
 </div>
 
-<span><%=# link "Edit", to: profile_path(@conn, :edit) %></span>
+<span><%= link "Edit", to: profile_path(@conn, :edit_profile) %></span>
+|
 <span><%= link "Back", to: user_path(@conn, :index) %></span>
