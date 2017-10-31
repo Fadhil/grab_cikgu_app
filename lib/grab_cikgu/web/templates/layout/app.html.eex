@@ -37,7 +37,7 @@
         <span class="logo"></span>
       </header>
 
-      <%= form_for @conn, search_path(@conn, :index), [name: :search], fn f -> %>
+      <%= form_for @conn, search_path(@conn, :index), [as: :search], fn f -> %>
         <%= text_input f, :query %>
         <%= submit "Search" %>
       <% end %>
