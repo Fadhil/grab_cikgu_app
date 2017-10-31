@@ -1,0 +1,48 @@
+<h2>Show Request</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%=# @request.remark %>
+  </li>
+
+  <li>
+    <strong>Rate:</strong>
+    <%= @request.rate %>
+  </li>
+
+  <li>
+    <strong>Subject:</strong>
+    <%= @request.subject %>
+  </li>
+
+  <li>
+    <strong>Area:</strong>
+    <%= @request.area %>
+  </li>
+
+  <li>
+    <strong>Time:</strong>
+    <%= @request.time %>
+  </li>
+
+  <li>
+    <strong>Start Date:</strong>
+    <%= @request.startdate %>
+  </li>
+
+  <li>
+    <strong>Period:</strong>
+    <%= @request.period %>
+  </li>
+
+  <li>
+    <strong>Remark:</strong>
+    <%= @request.remark %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: request_path(@conn, :edit, @request) %></span>
+<span><%= link "Back", to: request_path(@conn, :index) %></span>

@@ -29,6 +29,8 @@ defmodule GrabCikgu.Web.Router do
     pipe_through [:browser, :authenticate_user]
     resources "/videos", VideoController
     resources "/profiles", ProfileController
+    resources "/requests", RequestController
+    resources "/classes", ClassController
     get "/profile", ProfileController, :show_profile
     get "/profile/edit", ProfileController, :edit_profile
     put "/profile/update", ProfileController, :update_profile
