@@ -20,7 +20,7 @@ defmodule GrabCikgu.TutorialTest do
 	end
 
   describe "tutors" do
-		test "list tutors", %{tutors: tutors} do
+		test "list tutors", %{tutors: _tutors} do
 			# Let's make sure there are 5 users in the DB now
 			assert Repo.one(from u in User, select: count(u.id)) == 5
 
