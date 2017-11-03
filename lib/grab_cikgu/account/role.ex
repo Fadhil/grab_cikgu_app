@@ -16,6 +16,7 @@ defmodule GrabCikgu.Account.Role do
     role
     |> cast(attrs, [:name])
     |> validate_required([:name])
+    |> unique_constraint(:name)
   end
 
   def alphabetical(query) do
