@@ -1,20 +1,30 @@
 defmodule GrabCikgu.TutorialTest do
-  # use GrabCikgu.DataCase
-	use ExUnit.Case
+  use GrabCikgu.DataCase, async: true
 
   import GrabCikgu.Fixtures
   alias GrabCikgu.Tutorial
+	alias GrabCikgu.Account.User
 
-  setup do
-    # Explicitly get a connection before each test
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(GrabCikgu.Repo)
-	# Ecto.Adapters.SQL.Sandbox.mode(GrabCikgu.Repo, {:shared, self()})
-  end
+	setup do
+		# Setup tutor and student data in the test database using
+		# GrabCikgu.Fixtures
+		tutors =
+			for i <- 1..3 do
+				fixture(:tutor, %{name: "Tutor#{i}", username: "tutor#{i}"})
+			end
+		students =
+			for i <- 1..2 do
+				fixture(:student, %{name: "Student#{i}", username: "student#{i}"})
+			end
+		{:ok, %{tutors: tutors, students: students}}
+	end
 
   describe "tutors" do
-		test "list tutors" do
-			user = fixture(:user)
-			assert user.name == "User 1"
+		test "list tutors", %{tutors: tutors}=context do
+			# Let's make sure there are 5 users in the DB now
+			assert Repo.one(from u in User, select: count(u.id)) == 5
+
+			assert Enum.count(Tutorial.list_tutors) == 3
 		end
   end
 
