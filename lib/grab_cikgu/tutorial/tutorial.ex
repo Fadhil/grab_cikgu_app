@@ -7,6 +7,20 @@ defmodule GrabCikgu.Tutorial do
   alias GrabCikgu.Repo
 
   alias GrabCikgu.Tutorial.Request
+  alias GrabCikgu.Tutorial.Tutor, as: User
+  alias GrabCikgu.Account.{Role}
+
+  @doc """
+  Returns the list of tutors.
+  """
+  def list_tutors do
+    query =
+      from u in User,
+      join: r in Role,
+      where: u.role_id == r.id and r.name == "Tutor"
+
+    Repo.all(query)
+  end
 
   @doc """
   Returns the list of requests.
