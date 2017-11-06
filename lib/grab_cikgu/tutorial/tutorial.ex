@@ -5,8 +5,8 @@ defmodule GrabCikgu.Tutorial do
 
   import Ecto.Query, warn: false
   alias GrabCikgu.Repo
-
-  alias GrabCikgu.Tutorial.Request
+  alias GrabCikgu.Tutorial
+  alias GrabCikgu.Tutorial.{Request, TeachingSubject}
   alias GrabCikgu.Tutorial.Tutor, as: User
   alias GrabCikgu.Tutorial.Tutor
   alias GrabCikgu.Account.{Role}
@@ -228,5 +228,9 @@ defmodule GrabCikgu.Tutorial do
   """
   def change_class(%Class{} = class) do
     Class.changeset(class, %{})
+  end
+
+  def change_teaching_subject(%TeachingSubject{} = teaching_subject) do
+    TeachingSubject.changeset(teaching_subject, %{})
   end
 end
