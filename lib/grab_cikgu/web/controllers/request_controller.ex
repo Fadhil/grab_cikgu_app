@@ -13,9 +13,10 @@ defmodule GrabCikgu.Web.RequestController do
     render(conn, "index.html", requests: requests)
   end
 
-  def new(conn, _params) do
-    changeset = Tutorial.change_request(%GrabCikgu.Tutorial.Request{})
-    render(conn, "new.html", changeset: changeset)
+  def new(conn, params=%{"tutor_id" => tutor_id}) do
+    tutor = Tutorial.get_tutor!(tutor_id)
+    changeset = Tutorial.change_request(%GrabCikgu.Tutorial.Request{tutor_id: tutor_id})
+    render(conn, "new.html", changeset: changeset, tutor: tutor)
   end
 
   def create(conn, %{"request" => request_params}) do
