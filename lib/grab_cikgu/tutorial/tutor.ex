@@ -6,5 +6,6 @@ defmodule GrabCikgu.Tutorial.Tutor do
     field :username, :string
     has_one :profile, GrabCikgu.Account.Profile
     belongs_to :role, GrabCikgu.Account.Role, on_replace: :nilify
+    has_many :teaching_subjects, GrabCikgu.Tutorial.TeachingSubject, foreign_key: :user_id
   end
 end
