@@ -4,6 +4,7 @@ defmodule GrabCikgu.TutorialTest do
   import GrabCikgu.Fixtures
   alias GrabCikgu.Tutorial
 	alias GrabCikgu.Account.User
+	alias GrabCikgu.Tutorial.{Tutor, Student}
 
 	setup do
 		# Setup tutor and student data in the test database using
@@ -25,6 +26,24 @@ defmodule GrabCikgu.TutorialTest do
 			assert Repo.one(from u in User, select: count(u.id)) == 5
 
 			assert Enum.count(Tutorial.list_tutors) == 3
+		end
+
+		test "get_tutor by id" do
+			tutor1 = Repo.get_by(Tutor, name: "Tutor1")
+			assert Tutorial.get_tutor(tutor1.id) == {:ok, tutor1}
+		end
+
+		test "get_tutor by invalid id" do
+			assert {:error, :tutor_not_found} = Tutorial.get_tutor(0)
+		end
+
+		test "get_tutor! by id" do
+			tutor1 = Repo.get_by(Tutor, name: "Tutor1")
+			assert Tutorial.get_tutor!(tutor1.id) == tutor1
+		end
+
+		test "get_tutor! by invalid id" do
+			assert Tutorial.get_tutor!(0) == nil
 		end
   end
 
