@@ -10,6 +10,7 @@ defmodule GrabCikgu.Account.User do
     has_one :profile, GrabCikgu.Account.Profile
     belongs_to :role, GrabCikgu.Account.Role, on_replace: :nilify
     has_one :student_profile, GrabCikgu.Account.StudentProfile
+    has_many :teaching_subjects, GrabCikgu.Tutorial.TeachingSubject
 
     timestamps
   end
@@ -22,6 +23,7 @@ defmodule GrabCikgu.Account.User do
     |> cast(params, ~w(name username))
     |> validate_required([:name, :username])
     |> validate_length(:username, min: 1, max: 20)
+    |> cast_assoc(:teaching_subjects, required: false)
   end
 
   def registration_changeset(model, params) do
