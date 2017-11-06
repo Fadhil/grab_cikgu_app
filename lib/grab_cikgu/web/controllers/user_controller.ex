@@ -1,10 +1,10 @@
 defmodule GrabCikgu.Web.UserController do
 	use GrabCikgu.Web, :controller
 	alias GrabCikgu.Repo
-  alias GrabCikgu.Account
+  	alias GrabCikgu.Account
 	alias GrabCikgu.Account.Role
 	alias GrabCikgu.Account.Profile
-	require IEx
+	
 	plug :authenticate_user when action in [:index, :show]
 	plug :load_roles when action in [:new, :create, :edit, :update]
 
