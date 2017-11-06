@@ -4,7 +4,7 @@ defmodule GrabCikgu.Web.ProfileController do
   alias GrabCikgu.Account.User
   alias GrabCikgu.Repo
   alias GrabCikgu.Tutorial
-  alias GrabCikgu.Tutorial.TeachingSubject
+  alias GrabCikgu.Tutorial.{Subject, TeachingSubject}
 
   def index(conn, _params) do
     profiles = Account.list_profiles()
@@ -67,9 +67,14 @@ defmodule GrabCikgu.Web.ProfileController do
       _ ->
         changeset
     end
-
-
-    render(conn, "edit.html", profile: profile, changeset: changeset)
+    subjects = Tutorial.Subject.all
+    selected =  case (profile.user.teaching_subjects |> List.last) do
+      nil ->
+        nil
+      subject ->
+        subject.id
+    end
+    render(conn, "edit.html", profile: profile, changeset: changeset, subjects: subjects, selected: selected)
   end
 
   def update(conn, %{"id" => id, "profile" => profile_params}) do

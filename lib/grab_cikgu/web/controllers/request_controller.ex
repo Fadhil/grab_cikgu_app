@@ -7,6 +7,7 @@ defmodule GrabCikgu.Web.RequestController do
   alias GrabCikgu.Account.Role
   alias GrabCikgu.Account.Profile
   alias GrabCikgu.Account.User
+  alias GrabCikgu.Tutorial.Subject
 
   def index(conn, _params) do
     requests = Tutorial.list_requests()
@@ -14,9 +15,11 @@ defmodule GrabCikgu.Web.RequestController do
   end
 
   def new(conn, params=%{"tutor_id" => tutor_id}) do
-    tutor = Tutorial.get_tutor!(tutor_id)
+    subjects = Repo.all(Subject)
+    tutor = Tutorial.get_tutor!(tutor_id) |> Repo.preload([:teaching_subjects])
+    selected = tutor.teaching_subjects |> List.last
     changeset = Tutorial.change_request(%GrabCikgu.Tutorial.Request{tutor_id: tutor_id})
-    render(conn, "new.html", changeset: changeset, tutor: tutor)
+    render(conn, "new.html", changeset: changeset, tutor: tutor, subjects: subjects, selected: selected.id)
   end
 
   def create(conn, %{"request" => request_params}) do
