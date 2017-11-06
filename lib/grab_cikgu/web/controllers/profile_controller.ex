@@ -1,11 +1,10 @@
 defmodule GrabCikgu.Web.ProfileController do
   use GrabCikgu.Web, :controller
-require IEx
   alias GrabCikgu.Account
-  alias GrabCikgu.Account.Profile
   alias GrabCikgu.Account.User
   alias GrabCikgu.Repo
-  alias GrabCikgu.Account.Role
+  alias GrabCikgu.Tutorial
+  alias GrabCikgu.Tutorial.TeachingSubject
 
   def index(conn, _params) do
     profiles = Account.list_profiles()
@@ -47,18 +46,34 @@ require IEx
   def edit(conn, %{"id" => id}) do
     user = Repo.get(User, id)
     profile = Account.get_user_profile(user)
+              |> Repo.preload([:user])
     changeset = Account.change_profile(profile)
     render(conn, "edit.html", profile: profile, changeset: changeset)
   end
 
   def edit_profile(conn, _params) do
-    profile = Account.get_user_profile(conn.assigns.current_user)
+    user = conn.assigns.current_user |> Repo.preload([profile: [:user]])
+    profile = user.profile |> Repo.preload([user: [:teaching_subjects]])
     changeset = Account.change_profile(profile)
+    changeset = case profile.user.teaching_subjects do
+      [] ->
+        new_teaching_subject = Tutorial.change_teaching_subject(%TeachingSubject{rate: 0.00})
+        user_changeset = 
+          Account.change_user(profile.user) 
+          |> Ecto.Changeset.put_assoc(:teaching_subjects, [new_teaching_subject])
+
+        changeset
+          |> Ecto.Changeset.put_assoc(:user, user_changeset)
+      _ ->
+        changeset
+    end
+
+
     render(conn, "edit.html", profile: profile, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "profile" => profile_params}) do
-    profile = Account.get_profile!(id)
+    profile = Account.get_profile!(id) 
     case Account.update_profile(profile, profile_params) do
       {:ok, profile} ->
         conn
@@ -70,7 +85,10 @@ require IEx
   end
 
   def update_profile(conn, %{"profile" => profile_params}) do
-    profile = Account.get_user_profile(conn.assigns.current_user)
+    profile = 
+      Account.get_user_profile(conn.assigns.current_user)
+      |> Repo.preload([user: [:teaching_subjects]])
+      
     case Account.update_profile(profile, profile_params) do
       {:ok, profile} ->
         conn
