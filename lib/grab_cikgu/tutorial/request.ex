@@ -1,7 +1,7 @@
 defmodule GrabCikgu.Tutorial.Request do
   use Ecto.Schema
   import Ecto.Changeset
-  alias GrabCikgu.Tutorial.Request
+  alias GrabCikgu.Tutorial.{Request, Tutor, Student}
 
 
   schema "tutorial_requests" do
@@ -12,7 +12,8 @@ defmodule GrabCikgu.Tutorial.Request do
     field :startdate, :string
     field :period, :string
     field :remark, :string
-
+    belongs_to :tutor, Tutor
+    belongs_to :student, Student
     timestamps()
   end
 

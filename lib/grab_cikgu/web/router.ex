@@ -23,6 +23,7 @@ defmodule GrabCikgu.Web.Router do
     resources "/sessions", SessionController, only: [:new, :create, :delete]
     resources "/videos", VideoController
     post "/search", SearchController, :index
+    get "/tutors", TutorController, :index
   end
 
   scope "/manage", GrabCikgu.Web do
