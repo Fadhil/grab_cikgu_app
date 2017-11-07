@@ -15,11 +15,16 @@ defmodule GrabCikgu.Web.RequestController do
   end
 
   def new(conn, params=%{"tutor_id" => tutor_id}) do
-    subjects = Repo.all(Subject)
-    tutor = Tutorial.get_tutor!(tutor_id) |> Repo.preload([:teaching_subjects])
-    selected = tutor.teaching_subjects |> List.last
+    tutor = Tutorial.get_tutor!(tutor_id) |> Repo.preload([:teaching_subjects, :subjects])
+    subjects = tutor.subjects
+    selected = case tutor.teaching_subjects |> List.last do
+      nil ->
+        nil
+      subject ->
+        subject.id
+    end
     changeset = Tutorial.change_request(%GrabCikgu.Tutorial.Request{tutor_id: tutor_id})
-    render(conn, "new.html", changeset: changeset, tutor: tutor, subjects: subjects, selected: selected.id)
+    render(conn, "new.html", changeset: changeset, tutor: tutor, subjects: subjects, selected: selected)
   end
 
   def create(conn, %{"request" => request_params}) do

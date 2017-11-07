@@ -5,6 +5,8 @@ defmodule GrabCikgu.Tutorial.Subject do
   schema "subjects" do
     field :name, :string
     field :grade, :string
+    has_many :teaching_subjects, GrabCikgu.Tutorial.TeachingSubject, on_delete: :delete_all
+    has_many :tutors, through: [:teaching_subjects, :user]
   end
 
   def all do

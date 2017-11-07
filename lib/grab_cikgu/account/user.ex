@@ -11,6 +11,7 @@ defmodule GrabCikgu.Account.User do
     belongs_to :role, GrabCikgu.Account.Role, on_replace: :nilify
     has_one :student_profile, GrabCikgu.Account.StudentProfile
     has_many :teaching_subjects, GrabCikgu.Tutorial.TeachingSubject
+    has_many :subjects, through: [:teaching_subjects, :subject]
 
     timestamps
   end

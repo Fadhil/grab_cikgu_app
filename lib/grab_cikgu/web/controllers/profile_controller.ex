@@ -53,8 +53,9 @@ defmodule GrabCikgu.Web.ProfileController do
 
   def edit_profile(conn, _params) do
     user = conn.assigns.current_user |> Repo.preload([profile: [:user]])
-    profile = user.profile |> Repo.preload([user: [:teaching_subjects]])
+    profile = user.profile |> Repo.preload([user: [:teaching_subjects, :subjects]])
     changeset = Account.change_profile(profile)
+
     changeset = case profile.user.teaching_subjects do
       [] ->
         new_teaching_subject = Tutorial.change_teaching_subject(%TeachingSubject{rate: 0.00})
@@ -72,7 +73,7 @@ defmodule GrabCikgu.Web.ProfileController do
       nil ->
         nil
       subject ->
-        subject.id
+        subject.subject_id
     end
     render(conn, "edit.html", profile: profile, changeset: changeset, subjects: subjects, selected: selected)
   end

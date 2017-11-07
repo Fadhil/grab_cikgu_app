@@ -11,10 +11,12 @@ defmodule GrabCikgu.Tutorial.TeachingSubject do
     belongs_to :user, GrabCikgu.Account.User
   end
 
+  @all_fields ~w(rate subject_id)a
+  @required_fields @all_fields
   @doc false
   def changeset(%TeachingSubject{} = teaching_subject, attrs) do
     teaching_subject
-    |> cast(attrs, [:rate])
-    |> validate_required([:rate])
+    |> cast(attrs, @all_fields)
+    |> validate_required(@required_fields)
   end
 end
