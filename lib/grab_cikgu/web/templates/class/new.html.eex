@@ -1,6 +1,6 @@
 <h2>New Class</h2>
 
-<%= render "form.html", changeset: @changeset,
+<%= render "form.html", changeset: @changeset, tutor: @tutor, conn: @conn, request: @request,
                         action: class_path(@conn, :create) %>
 
 <span><%= link "Back", to: class_path(@conn, :index) %></span>

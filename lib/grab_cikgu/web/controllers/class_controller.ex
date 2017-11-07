@@ -13,9 +13,10 @@ defmodule GrabCikgu.Web.ClassController do
     render(conn, "index.html", classes: classes)
   end
 
-  def new(conn, _params) do
+  def new(conn, %{"request" => request_id}) do
+    request = Tutorial.get_request(request_id) |> Repo.preload([:student, tutor: [:profile, teaching_subjects: [:subject]]])
     changeset = Tutorial.change_class(%GrabCikgu.Tutorial.Class{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, tutor: request.tutor, request: request)
   end
 
   def create(conn, %{"class" => class_params}) do

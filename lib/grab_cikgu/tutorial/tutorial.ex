@@ -11,6 +11,10 @@ defmodule GrabCikgu.Tutorial do
   alias GrabCikgu.Tutorial.Tutor
   alias GrabCikgu.Account.{Role}
 
+
+  def get_request(id) do
+    Repo.get(Request, id)
+  end
   @doc """
   Returns the list of tutors.
   """

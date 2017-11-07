@@ -35,7 +35,7 @@ defmodule GrabCikgu.Web.RequestController do
         |> redirect(to: request_path(conn, :show, request))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset, selected: 1)
-    end
+    end 
   end
 
   def show(conn, %{"id" => id}) do

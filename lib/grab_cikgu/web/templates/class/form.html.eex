@@ -4,11 +4,47 @@
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
+ <div class="form-group">
+    <%= label f, :rate, class: "control-label" %>
+    <%= text_input f, :rate, class: "form-control", value: teaching_rate(@tutor) %>
+    <%= error_tag f, :rate %>
+  </div>
+  <%= hidden_input f, :tutor_id, value: @tutor.id %>
+  <%= hidden_input f, :student_id, value: user_from(@conn).id %>
+  <div class="form-group">
+    <%= label f, "Subject", class: "control-label" %>
+    <%= text_input f, :subject, value: subject_name(@tutor.teaching_subjects) , class: "form-control" %>
+    <%= error_tag f, :subject %>
+  </div>
 
   <div class="form-group">
-    <%= label f, :subject, class: "control-label" %>
-    <%= text_input f, :subject, class: "form-control" %>
-    <%= error_tag f, :subject %>
+    <%= label f, :area, class: "control-label" %>
+    <%= text_input f, :area, class: "form-control", value: teaching_area(@tutor) %>
+    <%= error_tag f, :area %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :time, class: "control-label" %>
+    <%= text_input f, :time, class: "form-control", value: @request.time %>
+    <%= error_tag f, :time %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :startdate, class: "control-label" %>
+    <%= text_input f, :startdate, class: "form-control", value: @request.startdate %>
+    <%= error_tag f, :startdate %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :period, class: "control-label" %>
+    <%= text_input f, :period, class: "form-control", value: @request.period %>
+    <%= error_tag f, :period %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :remark, class: "control-label" %>
+    <%= text_input f, :remark, class: "form-control" , value: @request.remark %>
+    <%= error_tag f, :remark %>
   </div>
 
   <div class="form-group">
