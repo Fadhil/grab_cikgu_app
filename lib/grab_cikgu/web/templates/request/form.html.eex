@@ -10,7 +10,8 @@
     <%= text_input f, :rate, class: "form-control", value: teaching_rate(@tutor) %>
     <%= error_tag f, :rate %>
   </div>
-  <%= hidden_input f, :tutor_id, valud: @tutor.id %>
+  <%= hidden_input f, :tutor_id, value: @tutor.id %>
+  <%= hidden_input f, :student_id, value: user_from(@conn).id %>
   <div class="form-group">
     <%= label f, "Subject", class: "control-label" %>
     <%= text_input f, :subject, value: subject_name(@tutor.teaching_subjects) , class: "form-control" %>
