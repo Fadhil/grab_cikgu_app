@@ -52,6 +52,7 @@ defmodule GrabCikgu.Account.Profile do
     model
     |> cast(params, @all_fields)
     |> cast_attachments(params, @required_file_fields, @optional_file_fields)
+    |> cast_assoc(:user, required: true)
   end
 
 end

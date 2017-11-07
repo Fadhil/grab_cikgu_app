@@ -105,12 +105,21 @@
   <br>
 
   <center><h3>Tuition Details</h3></center>
+  <%= inputs_for f, :user, fn uf ->%>
+    <%= inputs_for uf, :teaching_subjects, fn tsf -> %>
+      <div class="form-group">
+        <%= label tsf, "Subject", class: "control-label" %>
+        <%= select tsf, :subject_id, Enum.map(@subjects, &{"#{&1.name} - #{&1.grade}" , &1.id}), selected: @selected, class: "form-control" %>
+        <%= error_tag tsf, :subject_id %>
+      </div>
+      <div class="form-group">
+        <%= label tsf, :rate, class: "control-label" %>
+        <%= text_input tsf, :rate, class: "form-control" %>
+        <%= error_tag tsf, :rate %>
+      </div>
+    <% end %>
+  <% end %>
 
-  <div class="form-group">
-    <%= label f, :teaching, class: "control-label" %>
-    <%= text_input f, :teaching, class: "form-control" %>
-    <%= error_tag f, :teaching %>
-  </div>
 
   <div class="form-group">
     <%= label f, :area_covered, class: "control-label" %>

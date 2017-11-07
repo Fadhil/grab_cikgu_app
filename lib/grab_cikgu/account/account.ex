@@ -6,6 +6,7 @@ defmodule GrabCikgu.Account do
   import Ecto.Query, warn: false
   alias GrabCikgu.Repo
   alias GrabCikgu.Account.Video
+  alias GrabCikgu.Account.User
 
   @doc """
   Returns the list of videos.
@@ -200,7 +201,7 @@ defmodule GrabCikgu.Account do
   end
 
   def get_user_profile(user) do
-    user = user |> Repo.preload([:profile, :student_profile, :role])
+    user = user |> Repo.preload([:profile, :student_profile, :role, :teaching_subjects])
     profile = case user.role.name do
       "Tutor" ->
         if user.profile == nil do
@@ -335,5 +336,9 @@ defmodule GrabCikgu.Account do
         changeset_user_profile = Ecto.Changeset.put_assoc(changeset_user, :student_profile, changeset_profile)
         changeset_user_profile
     end
+  end
+
+  def change_user(%User{} = user) do
+    User.changeset(user, %{})
   end
 end
