@@ -10,7 +10,7 @@ defmodule GrabCikgu.Web.RequestController do
   alias GrabCikgu.Tutorial.Subject
 
   def index(conn, _params) do
-    requests = Tutorial.list_requests()
+    requests = Tutorial.list_requests() |> Repo.preload([:tutor])
     render(conn, "index.html", requests: requests)
   end
 

@@ -3,16 +3,16 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Remark</th>
-
+      <th>Request for</th>
+      <th>Start Date</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for request <- @requests do %>
     <tr>
-      <td><%= request.remark %></td>
-
+      <td><%= request.subject %> - <%= request.tutor.name %> </td>
+      <td><%= request.startdate %></td>
       <td class="text-right">
         <span><%= link "Show", to: request_path(@conn, :show, request), class: "btn btn-default btn-xs" %></span>
         <span><%= link "Edit", to: request_path(@conn, :edit, request), class: "btn btn-default btn-xs" %></span>
