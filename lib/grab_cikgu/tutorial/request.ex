@@ -21,7 +21,7 @@ defmodule GrabCikgu.Tutorial.Request do
   @doc false
   def changeset(%Request{} = request, attrs) do
     request
-    |> cast(attrs, [:rate, :subject, :area, :time, :startdate, :period, :remark])
-    |> validate_required([:rate, :subject, :area, :time, :startdate, :period, :remark])
+    |> cast(attrs, [:tutor_id, :rate, :subject, :area, :time, :startdate, :period, :remark])
+    |> validate_required([:time, :startdate, :period])
   end
 end

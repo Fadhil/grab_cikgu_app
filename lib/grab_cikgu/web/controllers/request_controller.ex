@@ -15,16 +15,16 @@ defmodule GrabCikgu.Web.RequestController do
   end
 
   def new(conn, params=%{"tutor_id" => tutor_id}) do
-    tutor = Tutorial.get_tutor!(tutor_id) |> Repo.preload([:teaching_subjects, :subjects])
+    tutor = Tutorial.get_tutor!(tutor_id) |> Repo.preload([:teaching_subjects, :subjects, :profile])
     subjects = tutor.subjects
     selected = case tutor.teaching_subjects |> List.last do
       nil ->
         nil
       subject ->
-        subject.id
+        subject.subject_id
     end
     changeset = Tutorial.change_request(%GrabCikgu.Tutorial.Request{tutor_id: tutor_id})
-    render(conn, "new.html", changeset: changeset, tutor: tutor, subjects: subjects, selected: selected)
+    render(conn, "new.html", changeset: changeset, tutor: tutor, subjects: subjects, selected: selected, teaching_subjects: tutor.teaching_subjects)
   end
 
   def create(conn, %{"request" => request_params}) do
@@ -34,17 +34,17 @@ defmodule GrabCikgu.Web.RequestController do
         |> put_flash(:info, "Request created successfully.")
         |> redirect(to: request_path(conn, :show, request))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, selected: 1)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    request = Tutorial.get_request!(id)
+    request = Tutorial.get_request!(id) |> Repo.preload([:tutor])
     render(conn, "show.html", request: request)
   end
 
   def edit(conn, %{"id" => id}) do
-    request = Tutorial.get_request!(id)
+    request = Tutorial.get_request!(id) 
     changeset = Tutorial.change_request(request)
     render(conn, "edit.html", request: request, changeset: changeset)
   end
